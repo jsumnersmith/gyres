@@ -7,7 +7,14 @@ Gyres
 > "The Gyres" W. B. Yeats
 
 
-A basic tool to help you make sense of your next iteration milestone from either Basecamp Classic or Github.
+Gyres is a basic tool to help you make sense of your next iteration milestone from either Basecamp Classic or Github.
 
-Create your own config.js using our sample-config.js.
-<code>cp sample-config.js congig.js</code>
+## Download and Install
+1. Check out the project.
+2. Run: <code>npm install</code>
+3. Start up the app: <code>npm run</code>(or run your own process).
+
+## Configuration
+Create your own config.js using our sample-config.js: <code>cp sample-config.js congig.js</code>
+
+## Running your Code
