@@ -1,4 +1,4 @@
-Iterator
+Gyres
 =================
 
 A basic tool to help you make sense of your next iteration milestone, from either Basecamp Classic or Github.
