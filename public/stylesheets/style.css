@@ -1,0 +1,375 @@
+@font-face {
+  font-family: 'Gotham';
+  src: url('/fonts/Sans-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sentinel';
+  src: url('/fonts/Serif-Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sentinel';
+  src: url('/fonts/Serif-BookItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Sentinel';
+  src: url('/fonts/Serif-Light.ttf') format('truetype');
+  font-weight: light;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sentinel';
+  src: url('/fonts/Serif-LightItalic.ttf') format('truetype');
+  font-weight: light;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Sentinel';
+  src: url('/fonts/Serif-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Sentinel';
+  src: url('/fonts/Serif-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Sentinel';
+  src: url('/fonts/Serif-Semibold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Whitney';
+  src: url('/fonts/Accent-Book.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Whitney';
+  src: url('/fonts/Accent-BookItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Whitney';
+  src: url('/fonts/Accent-Semibold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Asap';
+  src: url('/fonts/Asap-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Font Awesome';
+  src: url('/fonts/FontAwesome.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+body {
+  margin: 0;
+  font: 20px "Sentinel", serif;
+  background-color: #e8e8e4;
+  color: #001e30;
+  font-weight: bold;
+}
+a {
+  color: #5fa5c1;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #ffffff;
+  margin-top: 10px;
+}
+h1 {
+  font-size: 200%;
+  font-family: "Gotham";
+  text-transform: uppercase;
+  text-align: center;
+}
+h2 {
+  font-size: 175%;
+}
+h3 {
+  font-size: 150%;
+  background: #5fa5c1;
+  color: #ffffff;
+  padding: 1rem;
+  display: inline-block;
+  font-family: "Gotham", Helvetica, sans-serif;
+}
+h4 {
+  color: #222222;
+  font-size: 150%;
+}
+h5 {
+  font-size: 100%;
+}
+h6 {
+  font-size: 75%;
+}
+header {
+  background: #003b70;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+.block {
+  width: 100%;
+  padding: 40px 0;
+}
+.one-third {
+  display: inline-block;
+  float: left;
+  clear: none;
+  width: 33%;
+}
+.two-thirds {
+  display: inline-block;
+  float: left;
+  clear: none;
+  width: 64%;
+  padding-right: 2%;
+}
+.inner {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+.loader {
+  display: none;
+}
+.loader img {
+  margin: 0 auto;
+}
+body.loading .loader {
+  display: block;
+}
+body.loading .loader img {
+  margin: 5rem auto 0;
+  display: block;
+}
+.base {
+  max-width: 1140px;
+  display: block;
+  margin: 0 auto;
+}
+a#refresh {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  background: #00488a;
+  padding: .5rem 1rem;
+  cursor: pointer;
+  border-radius: 2px;
+}
+a#refresh:hover {
+  background: #004f96;
+}
+.iteration > li {
+  background: #ffffff;
+  padding: 2rem;
+}
+.iteration > li .date {
+  color: #003b70;
+  text-transform: uppercase;
+  font-family: "Gotham", Helvetica, sans-serif;
+}
+.iteration > li .progress-bar {
+  background: #003b70;
+  padding: .5rem;
+  margin-top: 1rem;
+  border-radius: 2px;
+}
+.iteration > li .progress-bar span {
+  padding: .5rem;
+  background: #ffffff;
+  color: #003b70;
+  text-transform: uppercase;
+  font-family: "Gotham", Helvetica, sans-serif;
+}
+.lists > li {
+  font-family: "Gotham", sans-serif;
+  background: #ffffff;
+  padding: 2rem;
+  margin: 1rem 0;
+  *zoom: 1;
+}
+.lists > li:before,
+.lists > li:after {
+  content: "";
+  display: table;
+}
+.lists > li:after {
+  clear: both;
+}
+.lists > li .list li {
+  font-family: "Sentinel", serif;
+  list-style: none;
+  padding: 1rem;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  margin: .5rem auto .25rem;
+  position: relative;
+}
+.lists > li .list li img {
+  position: absolute;
+  right: 1rem;
+  top: .7rem;
+  border-radius: 4rem;
+  width: 2rem;
+  height: 2rem;
+}
+li.complete {
+  color: #ddddd6;
+}
+.upcoming,
+.completed {
+  padding: 2rem;
+  background: #ddddd6;
+  margin-bottom: 1rem;
+}
+.upcoming li,
+.completed li {
+  padding: .5rem 0;
+}
