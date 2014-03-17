@@ -10,11 +10,11 @@ Gyres
 Gyres is a basic tool to help you make sense of your next iteration milestone from either Basecamp Classic or Github.
 
 ## Download and Install
-1. Check out the project.
-2. Run: <code>npm install</code>
-3. Start up the app: <code>npm run</code>(or run your own process).
+1. Check out the project<code>$ git clone https://github.com/punkave/gyres.git project-name</code>
+2. Run: <code>$ npm install</code>
+3. Start up the app: <code>$ npm run</code>(or run your own process).
 
 ## Configuration
-Create your own config.js using our sample-config.js: <code>cp sample-config.js congig.js</code>
+Create your own config.js using our sample-config.js: <code>$ cp sample-config.js config.js</code>
 
 ## Running your Code
