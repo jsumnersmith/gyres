@@ -1,5 +1,10 @@
 Gyres
 =================
+<< THE GYRES! the gyres! Old Rocky Face, look forth;
+Things thought too long can be no longer thought,
+For beauty dies of beauty, worth of worth,
+And ancient lineaments are blotted out.>>
+
 
 A basic tool to help you make sense of your next iteration milestone from either Basecamp Classic or Github.
 
