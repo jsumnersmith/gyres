@@ -7,7 +7,7 @@
 > "The Gyres" W. B. Yeats
 
 
-Gyres is a basic tool to help you make sense of your next iteration milestone from either Basecamp Classic or Github.
+Gyres [jahy&middot;_uh_rs] is a basic tool to help you make sense of your next iteration milestone from either Basecamp Classic or Github.
 
 ## Download and Install
 1. Check out the project<code>$ git clone https://github.com/punkave/gyres.git project-name</code>
