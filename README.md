@@ -1,4 +1,4 @@
-Gyres
+![Gyres](http://github.com/punkave/gyres/raw/master/public/images/gyres.png 'Gyres Logo');
 =================
 > _THE GYRES! the gyres! Old Rocky Face, look forth; <br />
 > Things thought too long can be no longer thought, <br />
