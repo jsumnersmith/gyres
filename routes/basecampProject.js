@@ -3,6 +3,7 @@ var moment = require('moment');
 var async = require('async');
 var Basecamp = require('basecamp-classic');
 var config = require('../config.js');
+var data = require('../routes/db.js');
 
 var bc = new Basecamp(
   config.credentials.basecamp.url,
@@ -24,6 +25,21 @@ BasecampProject.prototype.init = function(res) {
   // Let's fire of a series of functions.
   async.series([self.getMilestones.bind(self), self.getTodoLists.bind(self)], function(){
     self.nextMilestone.progress = Math.floor(self.nextMilestoneLists[0].completed.length / (self.nextMilestoneLists[0].todos.length + self.nextMilestoneLists[0].completed.length)*100);
+    var selfJSON = JSON.stringify(self);
+    //console.log(selfJSON);
+    async.series([
+      function(callback){
+        console.log("Going to put the stuff");
+        data.putProject(self.id, selfJSON, callback);
+      },
+      function(callback){
+        data.getProject(self.id, callback);
+      }
+    ], function(err, results){
+      console.log("What's in the db...?");
+      var dbEntry = JSON.parse(results[1]);
+      console.log(dbEntry);
+    });
     return res.send("Ok");
   });
   //self.getMilestones(res);

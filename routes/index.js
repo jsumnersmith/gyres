@@ -1,7 +1,6 @@
-var mongo = require("mongodb");
 var BasecampProject = require('../routes/basecampProject.js');
 var projects = require('../routes/projects.js');
-//var db = require ('../routes/db.js');
+//var data = require ('../routes/db.js');
 
 
 /* -----------------------------------------------
@@ -20,7 +19,6 @@ exports.index = function(req, res){
 
 exports.update = function(req, res) {
   projects.setProjects(req, res);
-  
 }
 
 
