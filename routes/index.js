@@ -13,7 +13,7 @@ var title = "F&M Iteration";
 exports.index = function(req, res){
   res.render('index.html', {
     title: title,
-    projects: projects.array,
+    projects: projects.getProjects(res)
   });
 };
 
