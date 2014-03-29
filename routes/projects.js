@@ -1,60 +1,78 @@
 // This file is about bringing all the projects into a single array;
 var config = require("../config.js");
+var async = require('async');
 var BasecampProject = require("../routes/BasecampProject.js");
 var data = require("../routes/db.js");
+var app = require('../app.js');
+//var io = require('socket.io').listen(app);
+
+console.log("App is", app);
+//console.log("Socket is", io);
 
 // Instatiate the array
 var projects = [];
 
-var setProjectsData = function(res, setCallback) {
-  config.projects.forEach(function(project) {
+var setProjectsData = function(setCallback) {
+  return async.eachSeries(config.projects, function(project, innerSetCallback) {
     if (project.type === "basecamp" || project.type === "Basecamp") {
 
       var projectCallback = function(basecampProject){
         basecampProject.type = "basecamp";
+
         console.log('---------------------------------');
         console.log('Adding ' + project.title);
         console.log('---------------------------------');
-        //Now we should push them to the database
+
         var projectString = JSON.stringify(basecampProject);
         data.putProject(project.id, projectString, function(){
-          getProjectsArray(res);
+          //console.log('Ready for your callback');
+          return innerSetCallback();
         });
-        //projects.push(basecampProject);
       };
 
-      var basecampProject = new BasecampProject.BasecampProject(project.id, {}, res, projectCallback);
+      new BasecampProject.BasecampProject(project.id, {}, projectCallback);
 
-    } else {
-      console.log("Oops. Pardon our dust. Github isn't supported yet.");
-    }
-  });
-  setCallback();
-}
-
-var getProjectsArray = function(res) {
-  config.projects.forEach(function(project){
-    if (project.type === "basecamp" || project.type === "Basecamp") {
-      data.getProject(project.id, function(result){
-        var projectData = JSON.parse(result);
-        return projects.push(projectData);
-      });
     } else {
       console.log("Oops. Pardon our dust. Github isn't supported yet.");
     }
   }, function(){
-    res.send('OK');
-    return projects;
+      return setCallback();
+  });
+}
+
+var getProjectsArray = function(outerArrayCallback) {
+  projects = [];
+  console.log(outerArrayCallback);
+  async.forEachSeries(config.projects, function(project, projectsArrayCallback){
+    if (project.type === "basecamp" || project.type === "Basecamp") {
+      return data.getProject(project.id, function(result){
+        var projectData = JSON.parse(result);
+        console.log("I'm in the getProjectArray Method");
+        projects.push(projectData);
+        return projectsArrayCallback();
+      });
+    } else {
+      console.log("Oops. Pardon our dust. Github isn't supported yet.");
+      return projectsArrayCallback();
+    }
+  }, function(){
+    console.log('Returning the old projects array');
+    console.log(outerArrayCallback);
+    return outerArrayCallback(projects);
   });
 }
 
 exports.getProjects = function(req, res) {
-  getProjectsArray(res);
+  getProjectsArray(function(projects) {
+    res.render('index.html', {
+      projects: projects
+    });
+  });
 }
 
 exports.setProjects = function(req, res){
-  setProjectsData(res, function(){
-    getProjectsArray(res);
+  setProjectsData(function(){
+    res.redirect('/');
   });
 };
 

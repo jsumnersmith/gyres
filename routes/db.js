@@ -14,7 +14,7 @@ Data.getProject = function(projectId, callback){
     if(err) {
       console.log("Oops. Couldn't get the projects.", err);
     }
-    console.log("Inside the method", projectId);
+    console.log("Inside the getProject method", projectId);
     return callback(value);
   })
 };

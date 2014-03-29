@@ -11,41 +11,23 @@ var bc = new Basecamp(
 );
 
 // Build out a prototype object for Basecamp Projects;
-function BasecampProject(projectId, settings, res, projectCallback) {
+function BasecampProject(projectId, settings, projectCallback) {
   var self = this;
   self.id = projectId;
   self.settings = settings;
-  self.init(res, projectCallback);
+  self.init(projectCallback);
 }
 
-BasecampProject.prototype.init = function(res, projectCallback) {
+BasecampProject.prototype.init = function( projectCallback) {
   var self = this;
   console.log("init");
 
-  console.log(projectCallback);
 
   // Let's fire of a series of functions.
   async.series([self.getMilestones.bind(self), self.getTodoLists.bind(self)], function(){
-    console.log("again", projectCallback);
     self.nextMilestone.progress = Math.floor(self.nextMilestoneLists[0].completed.length / (self.nextMilestoneLists[0].todos.length + self.nextMilestoneLists[0].completed.length)*100);
-    // var selfJSON = JSON.stringify(self);
-    // //console.log(selfJSON);
-    // async.series([
-    //   function(callback){
-    //     console.log("Going to put the stuff");
-    //     data.putProject(self.id, selfJSON, callback);
-    //   },
-    //   function(callback){
-    //     data.getProject(self.id, callback);
-    //   }
-    // ], function(err, results){
-    //   console.log("What's in the db...?");
-    //   var dbEntry = JSON.parse(results[1]);
-    //   console.log(dbEntry);
-    // });
     return projectCallback(self);
   });
-  //self.getMilestones(res);
 };
 
 BasecampProject.prototype.getMilestones = function(callback) {
@@ -117,6 +99,8 @@ BasecampProject.prototype.setTodoLists = function(lists, callback) {
     return list.milestoneId[0]._ === self.nextMilestoneId;
   });
 
+  console.log(self.nextMilestoneId);
+
   // Now get Todos
   async.eachSeries(self.nextMilestoneLists, function(list, listCallback) {
     console.log('Going to get some to-dos');
@@ -145,14 +129,7 @@ BasecampProject.prototype.getTodos = function(milestoneList, listCallback) {
 
 BasecampProject.prototype.setTodos = function(todos, milestoneList, listCallback) {
   var self = this;
-  // console.log('Res is here:');
-  // console.log(res);
-  // var todosFinished = function(res) {
-  //   console.log("Res is also here:");
-  //   console.log(res);
-  //
-  //   res.send("Ok");
-  // }
+
 
   console.log("setTodos");
   async.eachSeries(todos.todoItems.todoItem, function(item, todoCallback){

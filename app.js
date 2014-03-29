@@ -6,8 +6,6 @@ var routes = require('./routes');
 var nunjucks = require('nunjucks');
 var moment = require('moment');
 
-
-
 // make the express app
 var app = express();
 
@@ -39,6 +37,8 @@ app.configure( function(){
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(express.errorHandler());
 });
+
+
 
 //  routes/index.js is where all the fun happens
 app.get('/', routes.index);

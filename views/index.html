@@ -5,10 +5,10 @@
 {% include 'some_macros.html' %}
 
 
-{% block content %}
 
+{% block content %}
   <header class="">
-    <h1>{{ title }}</h1>
+    <h1>Title</h1>
     <a id="refresh">Refresh</a>
   </header>
 
@@ -17,7 +17,11 @@
   </div>
 
   <div class="base">
+
     {% for project in projects %}
+
+
+
       {% if project.type == "basecamp" %}
         <div class="two-thirds">
           <h3>This Iteration</h3>

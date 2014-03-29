@@ -1,29 +1,18 @@
+
+/* ---------------------------------------------------------------*/
+//  This page is about passing info to the templates
+/* ---------------------------------------------------------------*/
 var BasecampProject = require('../routes/basecampProject.js');
 var projects = require('../routes/projects.js');
-//var data = require ('../routes/db.js');
 
-
-/* -----------------------------------------------
-  This page is about passing info to the templates
------------------------------------------------- */
 
 // Some instance specific stuff.
 var title = "F&M Iteration";
 
 exports.index = function(req, res){
-  res.render('index.html', {
-    title: title,
-    projects: projects.getProjects(res)
-  });
+  projects.getProjects(req, res);
 };
 
-exports.update = function(req, res) {
-  projects.setProjects(req, res);
+exports.update = function(req, res, io) {
+  projects.setProjects(req, res, io);
 }
-
-
-// exports.update = function(req, res) {
-//   db.update();
-// };
-
-// }

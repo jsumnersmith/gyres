@@ -289,6 +289,9 @@ body.loading .loader img {
   margin: 5rem auto 0;
   display: block;
 }
+body.loading .base {
+  opacity: .2;
+}
 .base {
   max-width: 1140px;
   display: block;
