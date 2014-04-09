@@ -2,6 +2,7 @@
 var express = require('express')
 var http = require('http');
 var path = require('path');
+var fs = require('fs');
 var routes = require('./routes');
 var nunjucks = require('nunjucks');
 var moment = require('moment');
@@ -33,7 +34,7 @@ app.configure( function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use(require('less-middleware')({ src: __dirname + '/public' }));
+  app.use(require('less-middleware')(path.join(__dirname, 'public')));
   app.use(express.static(path.join(__dirname, 'public')));
   app.use(express.errorHandler());
 });
@@ -45,6 +46,20 @@ app.get('/', routes.index);
 app.get('/update', routes.update);
 
 // run the server
-http.createServer(app).listen(3000, function(){
-  console.log('The node server is running at http://localhost:3000');
+var port = 3000;
+// Heroku
+if (process.env.PORT) {
+  port = process.env.PORT;
+} else {
+  try {
+    // Stagecoach option
+    port = fs.readFileSync(__dirname + '/data/port', 'UTF-8').replace(/\s+$/, '');
+  } catch (err) {
+    console.log(err);
+    console.log("I see no data/port file, defaulting to port " + port);
+  }
+}
+
+http.createServer(app).listen(port, '127.0.0.1', function() {
+  console.log("Express server listening on %s:%d in %s mode", '127.0.0.1', port, app.settings.env);
 });

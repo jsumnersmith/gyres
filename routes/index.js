@@ -2,8 +2,8 @@
 /* ---------------------------------------------------------------*/
 //  This page is about passing info to the templates
 /* ---------------------------------------------------------------*/
-var BasecampProject = require('../routes/basecampProject.js');
-var projects = require('../routes/projects.js');
+var BasecampProject = require('./basecampProject.js');
+var projects = require('./projects.js');
 
 
 // Some instance specific stuff.

@@ -8,7 +8,7 @@
 
 {% block content %}
   <header class="">
-    <h1>Title</h1>
+    <h1><img src="/images/gyres-white.png"></h1>
     <a id="refresh">Refresh</a>
   </header>
 
@@ -30,7 +30,7 @@
                 <span class="date">{{project.nextMilestone.deadline[0]._ | date("MMMM DD")}}</span>
                 <h4>{{project.nextMilestone.title}}</h4>
                 <div class="progress-bar">
-                  <span style="display:inline-block; width:{{project.nextMilestone.progress}}%;">{{project.nextMilestone.progress}}%</span>
+                  <span style="display:inline-block; width:{% if project.nextMilestone.progress > 0 %}{{project.nextMilestone.progress}}% {% else %} 0 {% endif %};" class="{% if project.nextMilestone.progress > 0 %}active{% else %}empty{% endif %}">{{project.nextMilestone.progress}}%</span>
                 </div>
               </li>
                 <ul class="lists">

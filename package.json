@@ -15,7 +15,6 @@
     "level": "^0.18.0",
     "moment": "~2.5.1",
     "nunjucks": "*",
-    "socket.io": "^0.9.16",
     "underscore": "~1.6.0"
   }
 }

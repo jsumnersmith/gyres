@@ -1,13 +1,8 @@
 // This file is about bringing all the projects into a single array;
-var config = require("../config.js");
+var config = require("./../config.js");
 var async = require('async');
-var BasecampProject = require("../routes/BasecampProject.js");
-var data = require("../routes/db.js");
-var app = require('../app.js');
-//var io = require('socket.io').listen(app);
-
-console.log("App is", app);
-//console.log("Socket is", io);
+var BasecampProject = require("./basecampProject.js");
+var data = require("./db.js");
 
 // Instatiate the array
 var projects = [];
@@ -72,7 +67,7 @@ exports.getProjects = function(req, res) {
 
 exports.setProjects = function(req, res){
   setProjectsData(function(){
-    res.redirect('/');
+    res.send('Ok');
   });
 };
 

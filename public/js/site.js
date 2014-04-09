@@ -11,10 +11,10 @@ var Update = function() {
       url: "/update",
       context: document.body,
       success: function(){
-        //console.log("success");
-        console.log(event);
+        console.log("success");
+        //console.log(event);
         $('body').toggleClass('loading', false);
-        //window.location.reload(true);
+        window.location.reload(true);
       }
     });
   }
@@ -26,7 +26,7 @@ var Update = function() {
 
   window.setInterval(function(){
     ajaxUpdate();
-  }, 60000);
+  }, 300000);
 
 }
 

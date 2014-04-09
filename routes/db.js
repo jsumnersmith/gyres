@@ -1,7 +1,6 @@
 var levelup = require("level"),
-    BasecampProject = require("../routes/BasecampProject.js"),
-    config = require("../config.js"),
-    //projects = require("../routes/projects.js").array,
+    BasecampProject = require("./basecampProject.js"),
+    config = require("./../config.js"),
     async = require("async");
 
 var db = levelup('db/'+config.dbName, {'keyEncoding': 'json'});

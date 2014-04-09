@@ -1,66 +1,48 @@
 @font-face {
-  font-family: 'Gotham';
-  src: url('/fonts/Sans-Bold.ttf') format('truetype');
+  font-family: 'Source Sans Pro';
+  src: url('/fonts/SourceSansPro-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Sentinel';
-  src: url('/fonts/Serif-Book.ttf') format('truetype');
+  font-family: 'PT Serif';
+  src: url('/fonts/PT_Serif-Web-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Sentinel';
-  src: url('/fonts/Serif-BookItalic.ttf') format('truetype');
+  font-family: 'PT Serif';
+  src: url('/fonts/PT_Serif-Web-Italic.ttf') format('truetype');
   font-weight: normal;
   font-style: italic;
 }
 @font-face {
-  font-family: 'Sentinel';
-  src: url('/fonts/Serif-Light.ttf') format('truetype');
+  font-family: 'PT Serif';
+  src: url('/fonts/PT_Serif-Web-Light.ttf') format('truetype');
   font-weight: light;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Sentinel';
-  src: url('/fonts/Serif-LightItalic.ttf') format('truetype');
+  font-family: 'PT Serif';
+  src: url('/fonts//PT_Serif-Web-LightItalic.ttf') format('truetype');
   font-weight: light;
   font-style: italic;
 }
 @font-face {
-  font-family: 'Sentinel';
-  src: url('/fonts/Serif-Medium.ttf') format('truetype');
+  font-family: 'PT Serif';
+  src: url('/fonts//PT_Serif-Web-Semibold.ttf') format('truetype');
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Sentinel';
-  src: url('/fonts/Serif-MediumItalic.ttf') format('truetype');
+  font-family: 'PT Serif';
+  src: url('/fonts//PT_Serif-Web-SemiboldItalic.ttf') format('truetype');
   font-weight: 500;
   font-style: italic;
 }
 @font-face {
-  font-family: 'Sentinel';
-  src: url('/fonts/Serif-Semibold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Whitney';
-  src: url('/fonts/Accent-Book.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Whitney';
-  src: url('/fonts/Accent-BookItalic.ttf') format('truetype');
-  font-weight: normal;
-  font-style: italic;
-}
-@font-face {
-  font-family: 'Whitney';
-  src: url('/fonts/Accent-Semibold.ttf') format('truetype');
+  font-family: 'PT Serif';
+  src: url('/fonts//PT_Serif-Web-Bold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
@@ -206,13 +188,13 @@ table {
 }
 body {
   margin: 0;
-  font: 20px "Sentinel", serif;
+  font: 20px "PT Serif", serif;
   background-color: #e8e8e4;
   color: #001e30;
   font-weight: bold;
 }
 a {
-  color: #5fa5c1;
+  color: #5d959c;
 }
 h1,
 h2,
@@ -225,7 +207,7 @@ h6 {
 }
 h1 {
   font-size: 200%;
-  font-family: "Gotham";
+  font-family: "Source Sans Pro";
   text-transform: uppercase;
   text-align: center;
 }
@@ -234,11 +216,13 @@ h2 {
 }
 h3 {
   font-size: 150%;
-  background: #5fa5c1;
+  background: #5d959c;
   color: #ffffff;
   padding: 1rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   display: inline-block;
-  font-family: "Gotham", Helvetica, sans-serif;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
 }
 h4 {
   color: #222222;
@@ -251,9 +235,10 @@ h6 {
   font-size: 75%;
 }
 header {
-  background: #003b70;
+  background: #354b5e;
   padding: 1rem 0;
   margin-bottom: 2rem;
+  width: 100%;
 }
 .block {
   width: 100%;
@@ -272,8 +257,19 @@ header {
   width: 64%;
   padding-right: 2%;
 }
+@media (max-width: 1140px) {
+  .one-third,
+  .two-thirds {
+    float: left;
+    clear: left;
+    width: 96%;
+    padding-right: 2%;
+    padding-left: 2%;
+  }
+}
 .inner {
   max-width: 1140px;
+  width: 100%;
   margin: 0 auto;
 }
 .loader {
@@ -301,25 +297,25 @@ a#refresh {
   position: absolute;
   top: 1.5rem;
   right: 2rem;
-  background: #00488a;
+  background: #d0d1ca;
   padding: .5rem 1rem;
   cursor: pointer;
   border-radius: 2px;
 }
 a#refresh:hover {
-  background: #004f96;
+  background: #cacbc4;
 }
 .iteration > li {
   background: #ffffff;
   padding: 2rem;
 }
 .iteration > li .date {
-  color: #003b70;
+  color: #354b5e;
   text-transform: uppercase;
-  font-family: "Gotham", Helvetica, sans-serif;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
 }
 .iteration > li .progress-bar {
-  background: #003b70;
+  background: #d74b4b;
   padding: .5rem;
   margin-top: 1rem;
   border-radius: 2px;
@@ -327,12 +323,16 @@ a#refresh:hover {
 .iteration > li .progress-bar span {
   padding: .5rem;
   background: #ffffff;
-  color: #003b70;
+  color: #d74b4b;
   text-transform: uppercase;
-  font-family: "Gotham", Helvetica, sans-serif;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+}
+.iteration > li .progress-bar span.empty {
+  padding: .5rem 0;
+  color: #ffffff;
 }
 .lists > li {
-  font-family: "Gotham", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   background: #ffffff;
   padding: 2rem;
   margin: 1rem 0;
@@ -347,9 +347,9 @@ a#refresh:hover {
   clear: both;
 }
 .lists > li .list li {
-  font-family: "Sentinel", serif;
+  font-family: "PT Serif", serif;
   list-style: none;
-  padding: 1rem;
+  padding: 1rem 4rem 1rem 1rem;
   border: 1px solid #aaa;
   border-radius: 2px;
   margin: .5rem auto .25rem;

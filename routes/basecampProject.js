@@ -2,8 +2,8 @@ var _ = require('underscore');
 var moment = require('moment');
 var async = require('async');
 var Basecamp = require('basecamp-classic');
-var config = require('../config.js');
-var data = require('../routes/db.js');
+var config = require('./../config.js');
+var data = require('./db.js');
 
 var bc = new Basecamp(
   config.credentials.basecamp.url,
@@ -22,10 +22,17 @@ BasecampProject.prototype.init = function( projectCallback) {
   var self = this;
   console.log("init");
 
-
   // Let's fire of a series of functions.
-  async.series([self.getMilestones.bind(self), self.getTodoLists.bind(self)], function(){
-    self.nextMilestone.progress = Math.floor(self.nextMilestoneLists[0].completed.length / (self.nextMilestoneLists[0].todos.length + self.nextMilestoneLists[0].completed.length)*100);
+  async.series([self.getMilestones.bind(self), self.getTodoLists.bind(self)], function(err){
+    if(err){
+      console.log('Oops. The whole show went down.', err);
+    }
+    //console.log("I'm jumping the gun");
+    if(self.nextMilestoneLists[0].completed.length) {
+      self.nextMilestone.progress = Math.floor(self.nextMilestoneLists[0].completed.length / (self.nextMilestoneLists[0].todos.length + self.nextMilestoneLists[0].completed.length)*100);
+    } else {
+      self.nextMilestone.progress = 0;
+    }
     return projectCallback(self);
   });
 };
@@ -33,12 +40,15 @@ BasecampProject.prototype.init = function( projectCallback) {
 BasecampProject.prototype.getMilestones = function(callback) {
   var self = this;
   console.log("getMilestones");
-  console.log(self);
+  //console.log(self);
   // This goes off to BC to grab our Milestones.
   bc.milestones.fromProject(self.id, function(err, results){
     if(err){
+
+      console.log(err);
       console.log("Oops. Didn't grab the milestones");
     } else {
+      console.log('I did get into here...')
       // With appropriate milestones in hand, let's add
       // them to the context.
       return self.setMilestones(results, callback);
@@ -56,13 +66,18 @@ BasecampProject.prototype.setMilestones = function(results, callback){
 
   // Temporarily store upcoming milestones
   var upcomingMilestones = _.filter(self.allMilestones, function(milestone){
-    return moment(milestone.deadline[0]._).isAfter();
+    return moment(milestone.deadline[0]._).add('days', 1).isAfter()
   });
 
   // Give us back the next milestone (the main iteration);
-  self.nextMilestone = upcomingMilestones[0];
+  self.nextMilestone = _.find(upcomingMilestones, function(milestone){
+    console.log('looking for a falsey');
+    return milestone.completed[0]._ === "false";
+  });
 
   self.nextMilestoneId = self.nextMilestone.id[0]._;
+
+  console.log(self.nextMilestone.commentsCount);
 
   // Give us back the future milestones
   self.futureMilestones = _.rest(upcomingMilestones, 0);

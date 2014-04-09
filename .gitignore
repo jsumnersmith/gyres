@@ -1,4 +1,5 @@
 /node_modules
+/deployment
 .DS_Store
 config.js
 /db
