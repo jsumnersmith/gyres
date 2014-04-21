@@ -315,15 +315,31 @@ a#refresh:hover {
   font-family: "Source Sans Pro", Helvetica, sans-serif;
 }
 .iteration > li .progress-bar {
-  background: #d74b4b;
   padding: .5rem;
   margin-top: 1rem;
   border-radius: 2px;
 }
+.iteration > li .progress-bar.red {
+  background: #d74b4b;
+}
+.iteration > li .progress-bar.red span {
+  color: #d74b4b;
+}
+.iteration > li .progress-bar.yellow {
+  background: #f8cd4b;
+}
+.iteration > li .progress-bar.yellow span {
+  color: #f8cd4b;
+}
+.iteration > li .progress-bar.green {
+  background: #88d170;
+}
+.iteration > li .progress-bar.green span {
+  color: #88d170;
+}
 .iteration > li .progress-bar span {
   padding: .5rem;
   background: #ffffff;
-  color: #d74b4b;
   text-transform: uppercase;
   font-family: "Source Sans Pro", Helvetica, sans-serif;
 }

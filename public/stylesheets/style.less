@@ -22,11 +22,14 @@
 @aqua: rgb(95,165,193);
 @midnight: rgb(0,30,48);
 
-// Rando Yellow
-@yellow: rgb(255,201,37);
+//Rando Yellow for Progress
+@yellow: rgb(248,205,75);
 
-//Rando Red for Highlights
+//Rando Red for Progress
 @red: rgb(215,75,75);
+
+//Rando Green for Progress
+@green: rgb(136,209,112);
 
 .clearfix() {
   *zoom:1;
@@ -191,17 +194,41 @@ a#refresh
     }
     .progress-bar
     {
-      background: @red;
       padding: .5rem;
       margin-top: 1rem;
       border-radius: 2px;
+      &.red
+      {
+        background: @red;
+        span
+        {
+          color: @red;
+        }
+      }
+      &.yellow
+      {
+        background: @yellow;
+        span
+        {
+          color: @yellow;
+        }
+      }
+      &.green
+      {
+        background: @green;
+        span
+        {
+          color: @green;
+        }
+      }
       span
       {
         padding: .5rem;
         background: @white;
-        color: @red;
+        // color: @yellow;
         text-transform: uppercase;
         font-family: "Source Sans Pro", Helvetica, sans-serif;
+        max-width: 97.5%;
         &.empty
         {
           padding: .5rem 0;

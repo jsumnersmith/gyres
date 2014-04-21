@@ -44,6 +44,7 @@ app.configure( function(){
 //  routes/index.js is where all the fun happens
 app.get('/', routes.index);
 app.get('/update', routes.update);
+app.post('/upadate', routes.update);
 
 // run the server
 var port = 3000;

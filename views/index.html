@@ -29,7 +29,7 @@
               <li>
                 <span class="date">{{project.nextMilestone.deadline[0]._ | date("MMMM DD")}}</span>
                 <h4>{{project.nextMilestone.title}}</h4>
-                <div class="progress-bar">
+                <div class="progress-bar {% if project.nextMilestone.progress > 70 %}green{% elif (project.nextMilestone.progress > 40)%}yellow{% else %}red{% endif %}">
                   <span style="display:inline-block; width:{% if project.nextMilestone.progress > 0 %}{{project.nextMilestone.progress}}% {% else %} 0 {% endif %};" class="{% if project.nextMilestone.progress > 0 %}active{% else %}empty{% endif %}">{{project.nextMilestone.progress}}%</span>
                 </div>
               </li>
