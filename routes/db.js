@@ -1,49 +1,140 @@
 var levelup = require("level"),
-    BasecampProject = require("./basecampProject.js"),
+    basecamp = require("./basecamp.js"),
     config = require("./../config.js"),
-    async = require("async");
-
-var db = levelup('db/'+config.dbName, {'keyEncoding': 'json'});
+    _ = require('underscore');
+var db = levelup('db/'+config.dbName, {'valueEncoding': 'json'});
 
 var Data = {}
 
 // Open this puppy up.
-Data.getProject = function(projectId, callback){
+Data.getProject = function(project, callback){
+  var projectId = project.type + project.id;
   return db.get(projectId, function(err, value){
     if(err) {
       console.log("Oops. Couldn't get the projects.", err);
     }
-    console.log("Inside the getProject method", projectId);
     return callback(value);
   })
 };
 
-// A method for updating projects in the db.
-Data.putProject = function(projectId, project, callback){
-  return db.put(projectId, project, function(err){
-    if(err) {
-      console.log("Couldn't put:", projectId);
-      console.log("Oops. Couldn't put the projects", err);
-    }
-    //console.log('Nice put!', projectId, project);
+Data.listAllProjects = function(type, callback){
+  if (type === 'basecamp'){
+    new basecamp.ListAllProjects({}, function(projects){
+      return callback(projects);
+    });
+  } else {
+    console.log('Not supported');
     return callback(null);
-  })
+  }
 };
 
+// A method for putting/updating projects in the db.
+Data.putProject = function(project, putCallback){
+  var projectId = project.type + project.id;
+  if(project.type === ('basecamp' || 'Basecamp')){
+    // This is where we make our External API call.
+    new basecamp.PutProject(project.id, {}, function(project){
+      console.log("The project is: ", project);
+      return db.put(projectId, project, function(err){
+        if(err) {
+          console.log("Couldn't put:", projectId);
+          console.log("Oops. Couldn't put the project", err);
+        }
+        return putCallback(null);
+      })
+    });
+  } else if (project.type === ('github' || 'Github')){
+    console.log('We are getting there');
+    return putCallback(null);
+  }
+};
 
-exports.getProject = function(projectId, callback) {
-  Data.getProject(projectId, callback);
+Data.activateProject = function(project, activateCallback){
+  var projectId = project.type + project.id;
+  var activeProjectsId = 'active' /* + user.id (when that's a thing)*/
+  // Fetch the active projects array
+  db.get(activeProjectsId, function(err, value){
+    if(err) {
+      console.log("Oops. Couldn't get the active projects.", err);
+    }
+    var activeArray;
+    if (!value) {
+      activeArray = [project];
+    } else {
+      console.log(value);
+      value.push(project);
+      activeArray = _.uniq(value);
+      console.log(activeArray);
+    }
+    db.put(activeProjectsId, activeArray, function(err){
+      if(err) {
+        console.log("Couldn't activate:", project.id);
+        console.log("Oops. Couldn't activate the project", err);
+      }
+      //Skipping a step here and getting the active project.
+      return activateCallback(null);
+    });
+  });
+};
+
+Data.listActiveProjects = function(callback){
+  var activeProjectsId = 'active' /* + user.id (when that's a thing)*/
+  // Fetch the active projects array
+  db.get(activeProjectsId, function(err, value){
+    if(err) {
+      console.log("Oops. Couldn't get the active projects.", err);
+    }
+    callback(value);
+  });
+};
+
+Data.getUser = function(query, callback){
+  return db.get(query.email, function(err, user){
+    if(err) {
+      console.log("Oops. Couldn't get the user.", err);
+      return callback(err, null);
+    }
+    console.log("Inside the getUser method", user);
+    return callback(null, user);
+  });
 }
 
-exports.putProject = function(projectId, project, callback) {
-  Data.putProject(projectId, project, callback);
+Data.putUser = function(user, callback){
+  return db.put(user.email, user, function(err){
+    if(err) {
+      console.log("Oops. Couldn't put the user.", err);
+      return callback(err);
+    }
+    console.log("Inside the putUser method", user);
+    return callback(null);
+  });
 }
 
 
-// exports.setProjects = function(projectId) {
-//   Data.setProjects(projectId);
-// }
-//
-// exports.putProjects = function(projectId, callback) {
-//   Data.putProjects(projectId, callback);
-// }
+exports.getProject = function(project, callback) {
+  Data.getProject(project, callback);
+}
+
+exports.listAllProjects = function(type, callback){
+  Data.listAllProjects(type, callback);
+}
+
+exports.putProject = function(project, callback) {
+  Data.putProject(project, callback);
+}
+
+exports.activateProject = function(project, callback) {
+  Data.activateProject(project, callback);
+}
+
+exports.listActiveProjects = function(callback){
+  Data.listActiveProjects(callback);
+}
+
+exports.getUser = function(query, callback){
+  Data.getUser(query, callback);
+}
+
+exports.putUser = function(user, callback){
+  Data.putUser(user, callback);
+}

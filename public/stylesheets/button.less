@@ -1,0 +1,25 @@
+.button
+{
+  display: inline-block;
+  padding: .5rem 1rem;
+  font-family: "Source Sans Pro";
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 2px;
+  background: fadeout(white, 80%);
+  border: 2px solid white;
+  transition: background .1s ease-in-out;
+  -webkit-transition: background .1s ease-in-out;
+  -moz-transition: background .1s ease-in-out;
+  &:hover
+  {
+    background: fadeout(white, 70%);
+  }
+  & + .button
+  {
+    margin-top: 1rem;
+  }
+
+}

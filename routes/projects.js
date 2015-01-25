@@ -1,74 +1,66 @@
 // This file is about bringing all the projects into a single array;
 var config = require("./../config.js");
-var async = require('async');
-var BasecampProject = require("./basecampProject.js");
-var data = require("./db.js");
+var db = require("./db.js");
 
-// Instatiate the array
-var projects = [];
 
-var setProjectsData = function(setCallback) {
-  return async.eachSeries(config.projects, function(project, innerSetCallback) {
-    if (project.type === "basecamp" || project.type === "Basecamp") {
-
-      var projectCallback = function(basecampProject){
-        basecampProject.type = "basecamp";
-
-        console.log('---------------------------------');
-        console.log('Adding ' + project.title);
-        console.log('---------------------------------');
-
-        var projectString = JSON.stringify(basecampProject);
-        data.putProject(project.id, projectString, function(){
-          //console.log('Ready for your callback');
-          return innerSetCallback();
-        });
-      };
-
-      new BasecampProject.BasecampProject(project.id, {}, projectCallback);
-
-    } else {
-      console.log("Oops. Pardon our dust. Github isn't supported yet.");
-    }
-  }, function(){
-      return setCallback();
+//Get a single Project
+function getProject(project, callback){
+  db.getProject(project, function(result){
+    callback(result);
   });
 }
 
-var getProjectsArray = function(outerArrayCallback) {
-  projects = [];
-  console.log(outerArrayCallback);
-  async.forEachSeries(config.projects, function(project, projectsArrayCallback){
-    if (project.type === "basecamp" || project.type === "Basecamp") {
-      return data.getProject(project.id, function(result){
-        var projectData = JSON.parse(result);
-        console.log("I'm in the getProjectArray Method");
-        projects.push(projectData);
-        return projectsArrayCallback();
-      });
-    } else {
-      console.log("Oops. Pardon our dust. Github isn't supported yet.");
-      return projectsArrayCallback();
-    }
-  }, function(){
-    console.log('Returning the old projects array');
-    console.log(outerArrayCallback);
-    return outerArrayCallback(projects);
+// //Get All Projects
+function listAllProjects(type, callback){
+  db.listAllProjects(type, function(results){
+    callback(results);
   });
 }
 
-exports.getProjects = function(req, res) {
-  getProjectsArray(function(projects) {
-    res.render('index.html', {
-      projects: projects
-    });
+//Put a Project
+function putProject(project, putCallback){
+  console.log("In PutProject");
+  return db.putProject(project, putCallback);
+}
+
+//Activate a Project
+function activateProject(project, activateCallback){
+  console.log("In activateProject");
+  return db.activateProject(project, activateCallback);
+}
+
+function listActiveProjects(callback){
+  db.listActiveProjects(function(results){
+    callback(results);
   });
 }
 
-exports.setProjects = function(req, res){
-  setProjectsData(function(){
+exports.getProject = function(req, res, project){
+  return getProject(project, function(result){
+    return res.json(result);
+  });
+}
+
+exports.listAllProjects = function(req, res, type){
+  return listAllProjects(type, function(results){
+    return res.json(results);
+  });
+}
+
+exports.addProject = function(req, res, project){
+  return putProject(project, function(){
     res.send('Ok');
   });
-};
+}
 
-exports.array = projects;
+exports.activateProject = function(req, res, project){
+  return activateProject(project, function(){
+    res.send('Ok');
+  });
+}
+
+exports.listActiveProjects = function(req, res, type){
+  return listActiveProjects(function(results){
+    return res.json(results);
+  });
+}

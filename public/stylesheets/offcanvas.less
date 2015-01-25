@@ -1,0 +1,55 @@
+.offcanvas
+{
+  padding: 1rem;
+  overflow: scroll;
+}
+
+.offcanvas-header
+{
+  font-family: 'Source Sans Pro';
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+}
+
+.offcanvas-list
+{
+  padding: .5rem 0;
+  overflow: hidden;
+  .cf;
+}
+.offcanvas-buttons
+{
+  .cf;
+  padding: 1rem 0;
+  .button
+  {
+    display: block;
+  }
+}
+
+.offcanvas-list-item
+{
+  padding: .5rem;
+
+  &.offcanvas-project a
+  {
+    color: @gray-light;
+    font-family: "Source Sans Pro";
+    padding-left: 1.5rem;
+    letter-spacing: 1px;
+    text-decoration: none;
+    background: url(/images/icon-project.png) no-repeat left center;
+    transition: padding-left .1s ease-in-out;
+    -webkit-transition: padding-left .1s ease-in-out;
+    -moz-transition: padding-left .1s ease-in-out;
+    &:hover
+    {
+      padding-left: 1.75rem;
+    }
+  }
+  & + .offcanvas-list-item
+  {
+    border-top: 1px solid fadeout(@gray-light, 50%);
+  }
+}

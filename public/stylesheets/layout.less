@@ -1,0 +1,91 @@
+header
+{
+  background: @cornflower;
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.button--toggle-menu
+{
+  position: absolute;
+  top: 1.75rem;
+  left: 2rem;
+}
+
+.offcanvas
+{
+  position: absolute;
+  width: 300px;
+  background: @gray-standard;
+  height: 100%;
+  left: -300px;
+
+}
+
+.offcanvas,
+.canvas
+{
+  transition: transform .3s ease-in-out;
+
+}
+
+
+.nav
+{
+  .offcanvas
+  {
+    transform: translateX(300px);
+  }
+  .canvas
+  {
+    transform: translateX(300px);
+  }
+}
+
+.main
+{
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.one-third
+{
+  display: inline-block;
+  float: left;
+  clear: none;
+  width: 33%;
+}
+.two-thirds
+{
+  display: inline-block;
+  float: left;
+  clear: none;
+  width: 64%;
+  padding-right: 2%;
+}
+
+@media (max-width: 1140px) {
+  .one-third,
+  .two-thirds
+  {
+    float: left;
+    clear: left;
+    width: 96%;
+    padding-right: 2%;
+    padding-left: 2%;
+  }
+}
+
+.inner
+{
+  max-width: 1140px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.template
+{
+  display: none;
+}

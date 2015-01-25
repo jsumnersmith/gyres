@@ -1,0 +1,12 @@
+.cf
+{
+  &:before,
+  &:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+  &:after {
+    clear: both;
+  }
+  *zoom: 1;
+}

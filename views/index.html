@@ -1,69 +1,36 @@
 {% extends 'base_layout.html' %}
-
-
-{# here's some macros #}
 {% include 'some_macros.html' %}
 
-
-
 {% block content %}
-  <header class="">
-    <h1><img src="/images/gyres-white.png"></h1>
-    <a id="refresh">Refresh</a>
-  </header>
-
-  <div class="loader">
-    <img src="/images/loader.gif">
+  <div class="base template" data-gyres>
+    <div class="two-thirds">
+      <h3>This Iteration</h3>
+      <ul class="iteration">
+        {% raw%}
+          <li>
+            <span class="date" data-current-deadline></span>
+            <h4 data-current-title>{{project.title}}</h4>
+          </li>
+          <ul class="lists" data-current-list>
+            <li> {{project.currentMilestone.title}}
+              <ul class="list" data-open-todos ng-repeat="todo in project.currentMilestone.todos">
+                <li>{{todo.title}}</li>
+              </ul>
+              <ul class="list" data-closed-todos ng-repeat="todo in project.currentMilestone.completedTodos">
+                <li>{{todo.title}}</li>
+              </ul>
+            </li>
+          </ul>
+        {% endraw %}
+      </ul>
+    </div>
+    <div class="one-third">
+      <h3>Upcoming</h3>
+      <ul class="upcoming" data-future-lists>
+      </ul>
+      <h3>Completed</h3>
+      <ul class="completed" data-future-completed>
+      </ul>
+    </div>
   </div>
-
-  <div class="base">
-
-    {% for project in projects %}
-
-
-
-      {% if project.type == "basecamp" %}
-        <div class="two-thirds">
-          <h3>This Iteration</h3>
-          <ul class="iteration">
-              <li>
-                <span class="date">{{project.nextMilestone.deadline[0]._ | date("MMMM DD")}}</span>
-                <h4>{{project.nextMilestone.title}}</h4>
-                <div class="progress-bar {% if project.nextMilestone.progress > 70 %}green{% elif (project.nextMilestone.progress > 40)%}yellow{% else %}red{% endif %}">
-                  <span style="display:inline-block; width:{% if project.nextMilestone.progress > 0 %}{{project.nextMilestone.progress}}% {% else %} 0 {% endif %};" class="{% if project.nextMilestone.progress > 0 %}active{% else %}empty{% endif %}">{{project.nextMilestone.progress}}%</span>
-                </div>
-              </li>
-                <ul class="lists">
-                  {% for list in project.nextMilestoneLists %}
-                    <li>{{list.name}}
-                      <ul class="list">
-                        {% for todo in list.todos %}
-                          <li>{{todo.content}} {% if (todo.dueAt[0]._) %} ({{ todo.dueAt[0]._ | date('MMM DD') }}) {% endif %} {% if todo.avatarUrl %}<img src="{{todo.avatarUrl}}">{% endif %} </li>
-                        {% endfor %}
-                        {% for todo in list.completed %}
-                          <li class="complete">{{todo.content}} {% if (todo.dueAt[0]._) %} ({{ todo.dueAt[0]._ | date('MMM DD') }}) {% endif %} {% if todo.avatarUrl %}<img src="{{todo.avatarUrl}}">{% endif %} </li>
-                        {% endfor %}
-                      </ul>
-                    </li>
-                  {% endfor %}
-                </ul>
-          </ul>
-        </div>
-        <div class="one-third">
-          <h3>Upcoming</h3>
-          <ul class="upcoming">
-            {% for milestone in project.futureMilestones %}
-              <li>{{milestone.title}} - {{milestone.deadline[0]._ | date("MMMM DD, YYYY")}}</li>
-            {% endfor %}
-          </ul>
-          <h3>Completed</h3>
-          <ul class="completed">
-            {% for milestone in project.completedMilestones %}
-              <li>{{milestone.title}} - {{milestone.deadline[0]._ | date("MMMM DD, YYYY")}}</li>
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    {% endif %}
-  {% endfor %}
 {% endblock %}

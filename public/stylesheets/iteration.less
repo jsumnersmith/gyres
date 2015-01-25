@@ -1,0 +1,135 @@
+.iteration
+{
+  > li
+  {
+    background: @white;
+    padding: 2rem;
+    .date
+    {
+      color: @cornflower;
+      text-transform: uppercase;
+      font-family: "Source Sans Pro", Helvetica, sans-serif;
+    }
+    .progress-bar
+    {
+      padding: .5rem;
+      margin-top: 1rem;
+      border-radius: 2px;
+      &.red
+      {
+        background: @red;
+        span
+        {
+          color: @red;
+        }
+      }
+      &.yellow
+      {
+        background: @yellow;
+        span
+        {
+          color: @yellow;
+        }
+      }
+      &.green
+      {
+        background: @green;
+        span
+        {
+          color: @green;
+        }
+      }
+      span
+      {
+        padding: .5rem;
+        background: @white;
+        // color: @yellow;
+        text-transform: uppercase;
+        font-family: "Source Sans Pro", Helvetica, sans-serif;
+        max-width: 97.5%;
+        &.empty
+        {
+          padding: .5rem 0;
+          color: @white;
+        }
+      }
+    }
+  }
+}
+
+.lists
+{
+  > li
+  {
+    font-family: "Source Sans Pro", sans-serif;
+    background: @white;
+    padding: 2rem;
+    margin: 1rem 0;
+    .clearfix();
+    .list
+    {
+      li
+      {
+        font-family: "PT Serif", serif;
+        list-style: none;
+        padding: 1rem 4rem 1rem 1rem;
+        border: 1px solid #aaa;
+        border-radius: 2px;
+        margin: .5rem auto .25rem;
+        position:relative;
+        img
+        {
+          position: absolute;
+          right: 1rem;
+          top: .7rem;
+          border-radius: 4rem;
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+    }
+  }
+}
+li.complete
+{
+  color: darken(@gray-background, 10%);
+}
+
+.upcoming,
+.completed
+{
+  padding: 2rem;
+  background: darken(@gray-background, 10%);
+  margin-bottom: 1rem;
+  li
+  {
+    padding: .5rem 0;
+  }
+}
+
+// This deserves its own file
+.loader
+{
+  display: none;
+  img
+  {
+    margin: 0 auto;
+  }
+}
+
+body.loading
+{
+  .loader
+  {
+    display: block;
+    img
+    {
+      margin: 5rem auto 0;
+      display:block;
+    }
+  }
+  .main
+  {
+    opacity: .2;
+  }
+}

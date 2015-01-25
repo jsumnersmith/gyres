@@ -1,18 +1,37 @@
-
-/* ---------------------------------------------------------------*/
-//  This page is about passing info to the templates
-/* ---------------------------------------------------------------*/
-var BasecampProject = require('./basecampProject.js');
+/* ---------------------------------------------------------------------------------------*/
+//  This page is about passing info to app.js from projects.js (should that be my router?);
+/* ---------------------------------------------------------------------------------------*/
 var projects = require('./projects.js');
-
-
-// Some instance specific stuff.
-var title = "F&M Iteration";
+//var users = require('./users.js');
 
 exports.index = function(req, res){
-  projects.getProjects(req, res);
+  res.render('index.html');
 };
 
-exports.update = function(req, res, io) {
-  projects.setProjects(req, res, io);
+exports.styleguide = function(req, res){
+  res.render('styleguide.html');
+};
+
+exports.project = function(req, res){
+  var project = {id: req.params.id, type: req.params.type};
+  projects.getProject(req, res, project);
+}
+
+exports.projects = function(req, res){
+  var type = req.params.type;
+  projects.listAllProjects(req, res, type);
+}
+
+exports.add = function(req, res){
+  var project = {id: req.params.id, type: req.params.type};
+  projects.addProject(req, res, project);
+}
+
+exports.activate = function(req, res){
+  var project = {id: req.params.id};
+  projects.activateProject(req, res, project);
+}
+
+exports.active = function(req, res){
+  projects.listActiveProjects(req, res);
 }

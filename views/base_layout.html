@@ -1,16 +1,41 @@
 <!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>F&M Iterations</title>
-  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
-  <script type="text/javascript" src="/js/jquery.js"></script>
-  <script type="text/javascript" src="/js/site.js"></script>
-</head>
-<body>
+<html ng-app="gyres">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Gyres | An Iteration Tool</title>
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
 
-  {% block content %}
-  {% endblock %}
-
-</body>
+  </head>
+  <body ng-controller="Projects">
+    {% block offcanvas %}
+      <div class="offcanvas" >
+        <h6 class="offcanvas-header">Projects</h6>
+        <ul class="offcanvas-list offcanvas-list--projects">
+          {% raw %}
+            <li class="offcanvas-list-item offcanvas-project offcanvas-project--basecamp" ng-repeat="project in projects">
+              <a href="" data-id={{project.id}} ng-click="setProject(project)"> {{project.name}}</a>
+            </li>
+          {% endraw %}
+        </ul>
+        <div class="offcanvas-buttons">
+          <a href="" class="button">Settings</a>
+          <a href="" class="button" on-click="update-list">Refresh</a>
+        </div>
+      </div>
+    {% endblock %}
+    <div class="canvas">
+      {% block header %}
+        <header class="">
+          <a href="" class="button button--toggle-menu" data-toggle-menu>Menu</a>
+          <h1><img src="/images/gyres-white.png"></h1>
+        </header>
+      {% endblock %}
+      <div class="main">
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+    <script type="text/javascript" src="/js/bundle.js"></script>
+  </body>
 </html>

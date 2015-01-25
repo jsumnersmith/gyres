@@ -1,137 +1,27 @@
-info it worked if it ends with ok
-verbose cli [ 'node', '/usr/bin/npm', 'install' ]
-info using npm@1.1.4
-info using node@v0.6.12
-verbose config file /home/vagrant/.npmrc
-verbose config file /usr/etc/npmrc
-verbose config file /usr/share/npm/npmrc
-verbose caching /var/www/gyres/package.json
-verbose loadDefaults templating@0.0.1
-verbose readDependencies: using package.json deps
-verbose where, deps [ '/var/www/gyres',
-verbose where, deps   [ 'async',
-verbose where, deps     'basecamp-classic',
-verbose where, deps     'express',
-verbose where, deps     'github',
-verbose where, deps     'github-api',
-verbose where, deps     'less-middleware',
-verbose where, deps     'level',
-verbose where, deps     'moment',
-verbose where, deps     'nunjucks',
-verbose where, deps     'underscore' ] ]
-verbose from cache /var/www/gyres/package.json
-info preinstall templating@0.0.1
-verbose caching /var/www/gyres/node_modules/basecamp-classic/package.json
-verbose loadDefaults basecamp-classic@0.0.3
-verbose caching /var/www/gyres/node_modules/github/package.json
-verbose loadDefaults github@0.1.14
-verbose caching /var/www/gyres/node_modules/express/package.json
-verbose loadDefaults express@3.2.0
-verbose caching /var/www/gyres/node_modules/less-middleware/package.json
-verbose loadDefaults less-middleware@0.1.15
-verbose caching /var/www/gyres/node_modules/level/package.json
-verbose loadDefaults level@0.18.0
-verbose caching /var/www/gyres/node_modules/nunjucks/package.json
-verbose loadDefaults nunjucks@1.0.1
-verbose caching /var/www/gyres/node_modules/moment/package.json
-verbose loadDefaults moment@2.5.1
-verbose caching /var/www/gyres/node_modules/underscore/package.json
-verbose loadDefaults underscore@1.6.0
-verbose caching /var/www/gyres/node_modules/async/package.json
-verbose loadDefaults async@0.2.10
-verbose from cache /var/www/gyres/package.json
-verbose readDependencies: using package.json deps
-verbose from cache /var/www/gyres/node_modules/async/package.json
-verbose from cache /var/www/gyres/node_modules/basecamp-classic/package.json
-verbose from cache /var/www/gyres/node_modules/express/package.json
-verbose from cache /var/www/gyres/node_modules/github/package.json
-verbose from cache /var/www/gyres/node_modules/less-middleware/package.json
-verbose from cache /var/www/gyres/node_modules/level/package.json
-verbose from cache /var/www/gyres/node_modules/moment/package.json
-verbose from cache /var/www/gyres/node_modules/nunjucks/package.json
-verbose from cache /var/www/gyres/node_modules/underscore/package.json
-verbose cache add [ 'level@^0.18.0', null ]
-silly cache add: name, spec, args [ undefined, 'level@^0.18.0', [ 'level@^0.18.0', null ] ]
-verbose parsed url { pathname: 'level@^0.18.0',
-verbose parsed url   path: 'level@^0.18.0',
-verbose parsed url   href: 'level@^0.18.0' }
-silly cache add: name, spec, args [ 'level', '^0.18.0', [ 'level', '^0.18.0' ] ]
-verbose parsed url { pathname: '^0.18.0', path: '^0.18.0', href: '^0.18.0' }
-verbose addNamed [ 'level', '^0.18.0' ]
-verbose addNamed [ null, null ]
-info addNameTag [ 'level', '^0.18.0' ]
-verbose raw, before any munging level
-verbose url resolving [ 'https://registry.npmjs.org/', './level' ]
-verbose url resolved https://registry.npmjs.org/level
-http GET https://registry.npmjs.org/level
-verbose already installed in /var/www/gyres skipping moment@~2.5.1
-verbose already installed in /var/www/gyres skipping nunjucks@*
-verbose already installed in /var/www/gyres skipping underscore@~1.6.0
-verbose cache add [ 'async@^0.2.10', null ]
-silly cache add: name, spec, args [ undefined, 'async@^0.2.10', [ 'async@^0.2.10', null ] ]
-verbose parsed url { pathname: 'async@^0.2.10',
-verbose parsed url   path: 'async@^0.2.10',
-verbose parsed url   href: 'async@^0.2.10' }
-silly cache add: name, spec, args [ 'async', '^0.2.10', [ 'async', '^0.2.10' ] ]
-verbose parsed url { pathname: '^0.2.10', path: '^0.2.10', href: '^0.2.10' }
-verbose addNamed [ 'async', '^0.2.10' ]
-verbose addNamed [ null, null ]
-info addNameTag [ 'async', '^0.2.10' ]
-verbose already installed in /var/www/gyres skipping basecamp-classic@*
-verbose raw, before any munging async
-verbose url resolving [ 'https://registry.npmjs.org/', './async' ]
-verbose url resolved https://registry.npmjs.org/async
-http GET https://registry.npmjs.org/async
-verbose already installed in /var/www/gyres skipping express@3.2.0
-verbose cache add [ 'github@^0.1.14', null ]
-silly cache add: name, spec, args [ undefined, 'github@^0.1.14', [ 'github@^0.1.14', null ] ]
-verbose parsed url { pathname: 'github@^0.1.14',
-verbose parsed url   path: 'github@^0.1.14',
-verbose parsed url   href: 'github@^0.1.14' }
-silly cache add: name, spec, args [ 'github', '^0.1.14', [ 'github', '^0.1.14' ] ]
-verbose parsed url { pathname: '^0.1.14', path: '^0.1.14', href: '^0.1.14' }
-verbose addNamed [ 'github', '^0.1.14' ]
-verbose addNamed [ null, null ]
-info addNameTag [ 'github', '^0.1.14' ]
-verbose cache add [ 'github-api@^0.7.0', null ]
-silly cache add: name, spec, args [ undefined, 'github-api@^0.7.0', [ 'github-api@^0.7.0', null ] ]
-verbose parsed url { pathname: 'github-api@^0.7.0',
-verbose parsed url   path: 'github-api@^0.7.0',
-verbose parsed url   href: 'github-api@^0.7.0' }
-silly cache add: name, spec, args [ 'github-api', '^0.7.0', [ 'github-api', '^0.7.0' ] ]
-verbose parsed url { pathname: '^0.7.0', path: '^0.7.0', href: '^0.7.0' }
-verbose addNamed [ 'github-api', '^0.7.0' ]
-verbose addNamed [ null, null ]
-info addNameTag [ 'github-api', '^0.7.0' ]
-verbose already installed in /var/www/gyres skipping less-middleware@*
-verbose raw, before any munging github
-verbose url resolving [ 'https://registry.npmjs.org/', './github' ]
-verbose url resolved https://registry.npmjs.org/github
-http GET https://registry.npmjs.org/github
-verbose raw, before any munging github-api
-verbose url resolving [ 'https://registry.npmjs.org/', './github-api' ]
-verbose url resolved https://registry.npmjs.org/github-api
-http GET https://registry.npmjs.org/github-api
-ERR! Error: failed to fetch from registry: async
-ERR!     at /usr/share/npm/lib/utils/npm-registry-client/get.js:139:12
-ERR!     at cb (/usr/share/npm/lib/utils/npm-registry-client/request.js:31:9)
-ERR!     at Request._callback (/usr/share/npm/lib/utils/npm-registry-client/request.js:136:18)
-ERR!     at Request.callback (/usr/lib/nodejs/request/main.js:119:22)
-ERR!     at Request.<anonymous> (/usr/lib/nodejs/request/main.js:212:58)
-ERR!     at Request.emit (events.js:88:20)
-ERR!     at ClientRequest.<anonymous> (/usr/lib/nodejs/request/main.js:412:12)
-ERR!     at ClientRequest.emit (events.js:67:17)
-ERR!     at HTTPParser.onIncoming (http.js:1261:11)
-ERR!     at HTTPParser.onHeadersComplete (http.js:102:31)
-ERR! You may report this log at:
-ERR!     <http://bugs.debian.org/npm>
-ERR! or use
-ERR!     reportbug --attach /var/www/gyres/npm-debug.log npm
-ERR! 
-ERR! System Linux 3.2.0-23-generic-pae
-ERR! command "node" "/usr/bin/npm" "install"
-ERR! cwd /var/www/gyres
-ERR! node -v v0.6.12
-ERR! npm -v 1.1.4
-ERR! message failed to fetch from registry: async
-verbose exit [ 1, true ]
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'start' ]
+2 info using npm@1.4.24
+3 info using node@v0.10.32
+4 verbose node symlink /usr/local/bin/node
+5 verbose run-script [ 'prestart', 'start', 'poststart' ]
+6 info prestart templating@0.0.1
+7 info start templating@0.0.1
+8 verbose unsafe-perm in lifecycle true
+9 info templating@0.0.1 Failed to exec start script
+10 error templating@0.0.1 start: `node app.js`
+10 error Exit status 8
+11 error Failed at the templating@0.0.1 start script.
+11 error This is most likely a problem with the templating package,
+11 error not with npm itself.
+11 error Tell the author that this fails on your system:
+11 error     node app.js
+11 error You can get their info via:
+11 error     npm owner ls templating
+11 error There is likely additional logging output above.
+12 error System Darwin 14.0.0
+13 error command "node" "/usr/local/bin/npm" "start"
+14 error cwd /Users/jsumnersmith/Sites/gyres
+15 error node -v v0.10.32
+16 error npm -v 1.4.24
+17 error code ELIFECYCLE
+18 verbose exit [ 1, true ]
