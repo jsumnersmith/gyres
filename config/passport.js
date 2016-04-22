@@ -69,4 +69,24 @@ module.exports = function(passport) {
     }));
   };
 
+
+
+  //BC-Authentication
+  passport.use(new Thirty7SignalsStrategy({
+      clientID: config.credentials.basecamp.clientId,
+      clientSecret: config.credentials.basecamp.clientSecret,
+      callbackURL: "http://localhost:3000/app"
+    },
+    function(accessToken, refreshToken, profile, done) {
+      // asynchronous verification, for effect...
+      process.nextTick(function () {
+        //console.log("At login, the profile is", profile);
+
+        return routes.user(profile, accessToken, function(user){
+          return done(null, user);
+        })
+      });
+    }
+  ));
+
 }

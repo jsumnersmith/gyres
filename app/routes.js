@@ -1,8 +1,47 @@
+
+
 /* ---------------------------------------------------------------------------------------*/
 //  This page is about passing info to app.js from projects.js (should that be my router?);
 /* ---------------------------------------------------------------------------------------*/
 var projects = require('./projects.js');
 var users = require('./users.js');
+
+
+module.exports = function(app, passport) {
+
+  //Define all your routes here.
+  // Make reference to lib as needed.
+
+  //Project Stuff
+  app.get('/api/projects', function(req, res){
+    //list all projects for user.
+  })
+  app.get('/api/project', function(req, res){
+    //list a project from a company of a user.
+    // query options:
+    //  - company
+    //  - id
+    //  - active (selected to track in gyres)
+  })
+  app.put('/api/project', function(req, res){
+    //put a project from a company of a user.
+  })
+
+  //User Stuff
+  app.get('/api/user', function(req, res){
+    //get a user associated with a BC account
+  })
+  app.put('/api/user', function(req, res){
+    //put a user based on their BC account
+  })
+
+  app.post('/api/login', function(){
+    //log'em'in via BC
+  });
+
+
+}
+
 
 exports.index = function(req, res){
   res.render('index.html');

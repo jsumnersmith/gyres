@@ -27,8 +27,11 @@
     <div class="canvas">
       {% block header %}
         <header class="">
+          {# If there's a user, show the menu button, otherwise, show the menu #}
+          <a href="" class="button button--toggle-menu" data-toggle-menu>Menu</a>
           <a href="" class="button button--toggle-menu" data-toggle-menu>Menu</a>
           <h1><img src="/images/gyres-white.png"></h1>
+
         </header>
       {% endblock %}
       <div class="main">

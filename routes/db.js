@@ -17,15 +17,12 @@ Data.getProject = function(project, callback){
   })
 };
 
-Data.listAllProjects = function(type, callback){
-  if (type === 'basecamp'){
-    new basecamp.ListAllProjects({}, function(projects){
-      return callback(projects);
-    });
-  } else {
-    console.log('Not supported');
-    return callback(null);
-  }
+Data.listAllProjects = function(company, callback){
+
+  new basecamp.ListAllProjects({}, function(projects){
+    return callback(projects);
+  });
+
 };
 
 // A method for putting/updating projects in the db.
@@ -89,7 +86,7 @@ Data.listActiveProjects = function(callback){
 };
 
 Data.getUser = function(query, callback){
-  return db.get(query.email, function(err, user){
+  return db.get(query.id, function(err, user){
     if(err) {
       console.log("Oops. Couldn't get the user.", err);
       return callback(err, null);
@@ -100,7 +97,7 @@ Data.getUser = function(query, callback){
 }
 
 Data.putUser = function(user, callback){
-  return db.put(user.email, user, function(err){
+  return db.put(user.id, user, function(err){
     if(err) {
       console.log("Oops. Couldn't put the user.", err);
       return callback(err);
@@ -115,8 +112,8 @@ exports.getProject = function(project, callback) {
   Data.getProject(project, callback);
 }
 
-exports.listAllProjects = function(type, callback){
-  Data.listAllProjects(type, callback);
+exports.listAllProjects = function(company, callback){
+  Data.listAllProjects(company, callback);
 }
 
 exports.putProject = function(project, callback) {

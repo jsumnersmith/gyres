@@ -1,6 +1,14 @@
 {% extends 'base_layout.html' %}
 {% include 'some_macros.html' %}
 
+{% block header %}
+  <header class="">
+    <a href="" class="button button--toggle-menu" data-toggle-menu>Menu</a>
+    <h1><img src="/images/gyres-white.png"></h1>
+
+  </header>
+{% endblock %}
+
 {% block content %}
   <div class="base template" data-gyres>
     <div class="two-thirds">

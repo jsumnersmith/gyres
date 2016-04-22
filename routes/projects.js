@@ -3,6 +3,8 @@ var config = require("./../config.js");
 var db = require("./db.js");
 
 
+
+
 //Get a single Project
 function getProject(project, callback){
   db.getProject(project, function(result){
@@ -11,8 +13,8 @@ function getProject(project, callback){
 }
 
 // //Get All Projects
-function listAllProjects(type, callback){
-  db.listAllProjects(type, function(results){
+function listAllProjects(company, callback){
+  db.listAllProjects(company, function(results){
     callback(results);
   });
 }
@@ -41,8 +43,8 @@ exports.getProject = function(req, res, project){
   });
 }
 
-exports.listAllProjects = function(req, res, type){
-  return listAllProjects(type, function(results){
+exports.listAllProjects = function(req, res, company){
+  return listAllProjects(company, function(results){
     return res.json(results);
   });
 }

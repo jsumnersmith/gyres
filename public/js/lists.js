@@ -19,9 +19,10 @@ module.exports.init = function(){
   var app = angular.module('gyres', []);
 
   app.controller('Projects', function Projects($scope, $http){
-    $http.get('api/projects/basecamp').success(function(data) {
-      $scope.projects = data;
-    });
+    console.log("because I'm running");
+    // $http.get('api/projects/basecamp').success(function(data) {
+    //   $scope.projects = data;
+    // });
 
     function putProject(project){
       $http.put('api/projects/basecamp/'+project.id).success(function(data){
@@ -45,31 +46,4 @@ module.exports.init = function(){
       });
     }
   });
-
-  // app.controller('ProjectController', function ProjectController($scope){
-  //
-  // })
-
-
-  // list.on('update-list', function(e){
-  //   getProjects('basecamp', function(projects){
-  //     var data = {};
-  //     data.projects = projects;
-  //     list.set({data: data});
-  //   });
-  // });
-  //
-  // $(document).ready(function(){
-  //   getProjects('basecamp', function(projects){
-  //     var data = {};
-  //     data.projects = projects;
-  //     // console.log(data);
-  //     // list.set({data: data});
-  //     var list = new Ractive({
-  //       el: '.offcanvas-list',
-  //       template: listTemplate,
-  //       data: data
-  //     });
-  //   });
-  // })
 }

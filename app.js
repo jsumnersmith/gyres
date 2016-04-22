@@ -1,81 +1,111 @@
-// bring in the node modules we're going to use
-var express     = require('express');
-var http        = require('http');
-var path        = require('path');
-var fs          = require('fs');
+// modules =================================================
+var path            = require('path');
+var express         = require('express');
+var app             = express();
+var bodyParser      = require('body-parser');
+var methodOverride  = require('method-override');
+var session         = require('express-session');
+var mongoose        = require('mongoose');
+var fs              = require('fs');
+var browserify      = require('browserify');
+var exposify        = require('exposify');
+var passport        = require('passport');
+var flash           = require('flash');
+
 var routes      = require('./routes');
-var nunjucks    = require('nunjucks');
-var moment      = require('moment');
-var passport = require('passport');
-// express 4.0 stuff
-var morgan       = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser   = require('body-parser');
-var session      = require('express-session');
+var Thirty7SignalsStrategy = require('passport-37signals').Strategy;
 var errorhandler = require('errorhandler');
 var browserify = require('browserify');
 var exposify = require('exposify');
-//var angular = require('angular');
 
-// make the express app
-var app = express();
+// configuration ===========================================
 
-// set up nunjucks
-var env = new nunjucks.Environment(new nunjucks.FileSystemLoader(__dirname + '/views'), {
-  dev: true,
-  autoescape: true
-});
+// config files
+var db = require('./config/db');
 
-env.addFilter('log', function(data) {
-  console.log(data);
-});
+// set our port
+var port = process.env.PORT || 3000;
 
-env.addFilter('date', function(date, format) {
-  var s = moment(date).format(format);
-  return s;
-});
+// set our port
+var port = process.env.PORT || 3000;
 
-// configure the app
-env.express(app);
-app.set('views', __dirname + '/views');
-//app.use(express.favicon()); //Need to replace it.
-app.use(morgan('dev'));
+// N.B. We're using mongo now.
+// connect to our mongoDB database
+// (uncomment after you enter in your own credentials in config/db.js)
+mongoose.connect(db.url);
+
+//Bring in our passport config
+require('./config/passport')(passport);
+
+// parse application/json
 app.use(bodyParser.json());
+// parse application/vnd.api+json as json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(express.methodOverride());
-//app.use(app.router);
+// override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
+app.use(methodOverride('X-HTTP-Method-Override'));
+// set the less middleware
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'public')));
+// set the static files location /public/img will be /img for users
+app.use(express.static(__dirname + '/public'));
+// required for passport
+app.use(session({ secret: 'getitgotitgo' })); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 app.use(errorhandler());
 
-// app.use(session({ secret: 'thefoulragandboneshopoftheheart' })); // session secret
-// app.use(passport.initialize());
-// app.use(passport.session()); // persistent login sessions
-
-//  routes/index.js is where all the fun happens
 
 
-// I want to remove all gui rendering from this app.
-var router = express.Router();
+//User Authentication Stuff
+passport.serializeUser(function(user, callback) {
 
-app.get('/', routes.index);
+  callback(null, user);
+});
+
+passport.deserializeUser(function(obj, callback) {
+  callback(null, obj);
+});
+
+// routes ==================================================
+require('./app/routes')(app, passport); // configure our routes
+
+
+// //  routes/index.js is where all the fun happens
+// // I want to remove all gui rendering from this app.
+// var router = express.Router();
+
+//All we need is an index & a styleguide.
+app.get('/', routes.landing);
 app.get('/styles', routes.styleguide);
-router.route('/projects/:type').get(routes.projects);
-router.route('/projects/:type/:id')
-  .get(routes.project)
-  .put(routes.add);
+app.get('/app',
+  passport.authenticate('37signals', { failureRedirect: '/login' }),
+  function(req, res) {
+    console.log(req.user);
+    console.log("The profile is:", req.user._json.accounts);
+    console.log("The accessToken is:", req.accessToken);
+    return routes.index(req, res);
+});
+
+//Authentication Routes
+app.get('/login',
+  passport.authenticate('37signals'),
+  function(req, res){
+    // The request will be redirected to 37signals for authentication, so this
+    // function will not be called.
+  });
+
+//router.route('/projects/:company').get(routes.projects);
+//router.route('/project/:company/:id')
+  //.get(passport.authenticate('37signals', { failureRedirect: '/login' }), routes.project)
+  //.put(passport.authenticate('37signals', { failureRedirect: '/login' }), routes.add);
 //router.route('/users', routes.users);
-router.route('/active/')
-.get(routes.active);
-router.route('/activate/:id')
-.put(routes.activate);
+//router.route('/active/')
+//.get(passport.authenticate('37signals', { failureRedirect: '/login' }), routes.active);
+//router.route('/activate/:id')
+//.put(passport.authenticate('37signals', { failureRedirect: '/login' }), routes.activate);
 
-//app.get('/', routes.index);
-// app.get('/api/project/:type/:id', function() {}, routes.project);
-// app.get('/api/projects/:type', routes.projects);
-// app.get('/api/add/:type/:id', routes.add);
-
-app.use('/api', router);
+//app.use('/api', router);
 
 
 exposify.config = {angular: 'angular'};

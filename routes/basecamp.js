@@ -4,19 +4,23 @@ var async = require('async');
 var Basecamp = require('basecamp-classic');
 var config = require('./../config.js');
 var chalk = require('chalk');
-
-var bc = new Basecamp(
-  config.credentials.basecamp.url,
-  config.credentials.basecamp.token
-);
+var bc;
 
 // Build out a prototype object for Basecamp Projects;
-function PutProject(projectId, settings, projectCallback) {
+function PutProject(auth, projectId, settings, projectCallback) {
+  console.log(auth);
+  bc = new Basecamp(
+    auth.url,
+    auth.token,
+    'token'
+  );
+
   var self = this;
   self.id = projectId;
   self.settings = settings;
   self.project = {};
   self.init(projectCallback);
+
 }
 
 PutProject.prototype.init = function( projectCallback) {
@@ -219,9 +223,15 @@ PutProject.prototype.setTodos = function(todos, milestoneList, listCallback) {
 // };
 
 function ListAllProjects(settings, projectCallback) {
+
   var self = this;
   self.settings = settings;
   self.projectList = [];
+  bc = new Basecamp(
+    self.settings.url,
+    self.settings.token,
+    'token'
+  )
   self.init(projectCallback);
 }
 
